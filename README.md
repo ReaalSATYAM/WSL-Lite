@@ -52,9 +52,7 @@ Access the app at **http://localhost:3000**.
 ---
 
 ## 🧩 Usage
-<video src="demo.mp4" width="600" controls>
-  Your browser does not support the video tag.
-</video>
+![demo](demo.gif)
 
 
 1. Launch the UI.  
