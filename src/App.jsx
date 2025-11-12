@@ -2,10 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 /* ---------------------
-   Data (matches backend SAFE_PROFILES)
+   Data 
    --------------------- */
 const ALL_LIBS = [
-  // CLI utilities / core
   { id: "bash", name: "bash" },
   { id: "curl", name: "curl" },
   { id: "git", name: "git" },
@@ -22,7 +21,6 @@ const ALL_LIBS = [
   { id: "less", name: "less" },
   { id: "htop", name: "htop" },
 
-  // Shells & dev tooling
   { id: "zsh", name: "zsh" },
   { id: "sudo", name: "sudo" },
   { id: "build-base", name: "build-base" },
@@ -35,14 +33,11 @@ const ALL_LIBS = [
   { id: "npm", name: "npm" },
   { id: "openssh-client", name: "openssh-client" },
   { id: "docker-cli", name: "docker-cli" },
-
-  // Python ecosystem (Alpine package names)
   { id: "python3", name: "python3" },
   { id: "py3-pip", name: "py3-pip" },
   { id: "py3-setuptools", name: "py3-setuptools" },
   { id: "py3-virtualenv", name: "py3-virtualenv" },
 
-  // Data / scientific (Alpine packages)
   { id: "py3-numpy", name: "py3-numpy" },
   { id: "py3-pandas", name: "py3-pandas" },
   { id: "py3-matplotlib", name: "py3-matplotlib" },
@@ -68,7 +63,6 @@ const PROFILES = {
       { id: "grep", name: "grep" },
       { id: "sed", name: "sed" },
       { id: "less", name: "less" },
-      // include light python support (Alpine packages)
       { id: "python3", name: "python3" },
       { id: "py3-pip", name: "py3-pip" },
       { id: "py3-setuptools", name: "py3-setuptools" },
@@ -406,7 +400,6 @@ export default function WslLiteLanding() {
   const [installing, setInstalling] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  // slide state + direction
   const [currentSlide, setCurrentSlide] = useState(0); // 0 = home, 1 = profiles
   const [direction, setDirection] = useState(1);
   const isTransitioning = useRef(false);
@@ -441,7 +434,6 @@ export default function WslLiteLanding() {
   setInstallLog((l) => [...l, `Starting install for ${title}...`]);
   setProgress(0);
 
-  // ✅ Always send correct package list
   const libs =
     profileKey === "custom"
       ? Array.from(customLibs)
@@ -477,7 +469,7 @@ export default function WslLiteLanding() {
 }
 
   /* ---------------------
-     Wheel handler (let inner scrolls work)
+     Wheel handler
      --------------------- */
   useEffect(() => {
     const getScrollableParent = (el) => {
@@ -540,10 +532,6 @@ export default function WslLiteLanding() {
      --------------------- */
   return (
     <div className="relative bg-[#0b1220] text-slate-200 font-sans min-h-screen">
-      {/* NOTE: popup preview is rendered outside the animated slide container below
-          so it won't be clipped by transforms or motion wrappers. */}
-      {/* ---------- Hover preview (fixed, top layer) ---------- */}
-      {/* ---------- Hover preview (over card itself) ---------- */}
 <AnimatePresence>
   {popupProfileKey && PROFILES[popupProfileKey] && currentSlide === 1 && (
     <motion.div
@@ -642,12 +630,6 @@ export default function WslLiteLanding() {
                     </button>
                   </div>
 
-                  {/* <div className="mt-6 bg-slate-800 p-4 rounded-lg">
-                    <h3 className="text-sm text-slate-300 mb-2">Quick install (Windows PowerShell):</h3>
-                    <pre className="bg-transparent text-sm p-2 rounded text-slate-200">
-                      curl -LO &lt;installer-url&gt; &amp;&amp; python3 wsl_lite_installer.py
-                    </pre>
-                  </div> */}
                   <div className="bg-slate-900 border border-slate-700 rounded-xl p-4 font-mono text-slate-300 shadow-2xl overflow-hidden">
                     <p className="text-cyan-400"> Starting WSL-Lite setup...</p>
                     <p className="animate-pulse">Installing nano... ✔️</p>
@@ -782,7 +764,7 @@ bg-slate-900/95 border border-slate-700 rounded-xl p-4 shadow-2xl w-72 transitio
           })}
         </div>
 
-      {/* RIGHT: customize (unchanged) */}
+      {/* RIGHT: customize*/}
       <div className="lg:flex-1">
         <motion.div
           whileHover={{ y: -2 }}
